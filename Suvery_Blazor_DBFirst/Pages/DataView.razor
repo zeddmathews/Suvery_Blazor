@@ -1,0 +1,60 @@
+﻿@page "/fetchdata";
+@using DataModels.Models;
+@using Survey_Blazor_DBFirst.Services;
+@inject IFrontEndService _frontEndService;
+@code
+{
+    //private List<Objective> Data = null;
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    await base.OnInitializedAsync();
+    //    Data = await _frontEndService.GetObjectives();
+    //}
+    private List<Objective> Data = null;
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        Data = await _frontEndService.GetObjectives();
+    }
+}
+
+<h3>Objective Details</h3>
+@if(Data == null)
+{
+    <h4>Loading...</h4>
+}
+else
+{
+    @if(Data.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ObjectId</th>
+                    <th>Questions</th>
+                    <th>Respondents Weight</th>
+                    <th>Respondents Total</th>
+                    <th>Expectation Gap</th>
+                    <th>Accuracy</th>
+                    <th>Manager's Weight</th>
+                    <th>Manager's Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Data)
+                {
+                    <tr>
+                        <td>@item.ObjId</td>
+                        <td>@item.Questions</td>
+                        <td>@item.RespondentsWeight</td>
+                        <td>@item.RespondentsTotal</td>
+                        <td>@item.ExpectationGap</td>
+                        <td>@item.Accuracy</td>
+                        <td>@item.ManagerSWeight</td>
+                        <td>@item.ManagerSTotal</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}

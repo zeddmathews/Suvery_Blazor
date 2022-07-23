@@ -1,0 +1,57 @@
+﻿@page "/"
+
+<h1>Login</h1>
+
+@page "/"
+@using System.ComponentModel.DataAnnotations
+<EditForm>
+
+</EditForm>
+
+@code
+{
+    public class FieldValidation
+    {
+        [Required(ErrorMessage = "Username required.")]
+        [RegularExpression(@"^.{2,}$", ErrorMessage = "Minimum 2 characters required")]
+        [StringLength(20, ErrorMessage = "Maximum 20 characters")]
+        public string username { get; set; }
+
+        [Required(ErrorMessage = "Password required")]
+
+        public string password { get; set; }
+    }
+}
+@*<div class="row d-flex px-3">
+    <div class="col-xl-4 d-flex p-3">
+        <RadzenCard Style="width: 100%;">
+            <h2 class="mb-4">Simple login</h2>
+            <RadzenTemplateForm Data=@("SimpleLogin") Action="http://www.google.com">
+                <RadzenLogin AllowRegister="false" AllowResetPassword="false" Login=@(args => OnLogin(args, "Simple login")) />
+            </RadzenTemplateForm>
+        </RadzenCard>
+    </div>
+</div>
+
+<EventConsole @ref=@console Class="mt-4" />
+
+@code {
+    string userName = "admin";
+    string password = "admin";
+    EventConsole console;
+
+    void OnLogin(LoginArgs args, string name)
+    {
+        console.Log($"{name} -> Username: {args.Username} and password: {args.Password}");
+    }
+
+    void OnRegister(string name)
+    {
+        console.Log($"{name} -> Register");
+    }
+
+    void OnResetPassword(string value, string name)
+    {
+        console.Log($"{name} -> ResetPassword for user: {value}");
+    }
+}*@
